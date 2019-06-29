@@ -8,8 +8,9 @@
 
 import Foundation
 
+// 数组实现
 
-class Stack {
+class ArrayStack {
     var stack: [Any]
     var isEmpty: Bool { return stack.isEmpty }
     var peek: Any? { return stack.last }
@@ -30,4 +31,36 @@ class Stack {
         }
     }
     
+}
+
+// protocol
+
+protocol Stack {
+    associatedtype Element
+    
+    var size: Int { get }
+    var isEmpty: Bool { get }
+    var peek: Element? { get }
+    
+    mutating func push(object: Element)
+    mutating func pop() -> Element?
+    
+}
+
+struct IntStack: Stack {
+    typealias Element = Int
+    
+    var size: Int { return stack.count }
+    var isEmpty: Bool { return stack.isEmpty }
+    var peek: Int? { return stack.last }
+    
+    private var stack = [Element]()
+    
+    mutating func push(object: Int) {
+        stack.append(object)
+    }
+    
+    mutating func pop() -> Int? {
+        return stack.last
+    }
 }
